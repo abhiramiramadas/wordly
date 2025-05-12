@@ -1,0 +1,137 @@
+/* General styling for the body */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+/* Container for the game */
+.game-container {
+    text-align: center;
+}
+
+/* Styling for the grid where guesses will appear */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 50px);
+    grid-gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Each cell of the grid (representing a letter) */
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    text-transform: uppercase;
+}
+
+/* Color for correctly placed letters (green) */
+.correct {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Color for letters in the word but in the wrong position (yellow) */
+.present {
+    background-color: #FFC107;
+    color: black;
+}
+
+/* Color for letters not in the word (gray) */
+.absent {
+    background-color: #757575;
+    color: white;
+}
+
+/* Style for buttons (Start New Game and Submit Guess) */
+.start-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+.start-btn:hover {
+    background-color: #45a049;
+}
+
+/* Styling for the input field */
+#guess {
+    width: 150px;
+    padding: 8px;
+    font-size: 16px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    text-transform: uppercase;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+    display: inline-block !important;
+    caret-color: black !important;
+    user-select: text !important;
+}
+
+/* Visual feedback for input focus */
+#guess:focus {
+    outline: none !important;
+    border-color: #4CAF50 !important;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5) !important;
+}
+
+/* Ensure input field is centered */
+.game-container input, .game-container button {
+    display: inline-block;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.modal-btn:hover {
+    background-color: #45a049;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wordle Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>Wordle Game</h1>
+    <div class="grid" id="grid"></div>
+    <input type="text" id="guess" maxlength="5" placeholder="Enter your guess" autofocus />
+    <button class="start-btn" id="submitGuessButton">Submit Guess</button>
+    <button class="start-btn" id="startNewGameButton">Start New Game</button>
+  </div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <p id="modal-message"></p>
+      <button id="modal-close" class="modal-btn">OK</button>
+    </div>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>
