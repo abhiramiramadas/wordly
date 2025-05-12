@@ -45,7 +45,10 @@ A **desktop** implementation of the popular **word-guessing game Wordle**, built
 **Screenshots**
 ---------------
 
-*(Optional: Add* ***screenshots*** *of the game, e.g., gameplay, win modal. Save images in a* /screenshots *folder and link them here.)*
+![image](https://github.com/user-attachments/assets/7a9b2f4a-345f-4677-aca8-83993f27f96a)
+![image](https://github.com/user-attachments/assets/0bb92d85-8f18-4026-9a95-eae07993ee24)
+
+
 
 * * * * *
 
