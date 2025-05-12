@@ -1,13 +1,16 @@
 let targetWord = "";
 let currentRow = 0;
 let guesses = [];
+let validWordsCache = []; // Cache for validated words
 
 async function getRandom5LetterWord() {
     try {
         const response = await fetch('https://api.datamuse.com/words?sp=?????&max=1000');
         const words = await response.json();
         if (words.length > 0) {
-            return words[Math.floor(Math.random() * words.length)].word;
+            const word = words[Math.floor(Math.random() * words.length)].word;
+            validWordsCache.push(word); // Cache the target word
+            return word;
         }
         return getLocalWord();
     } catch (error) {
@@ -19,6 +22,37 @@ async function getRandom5LetterWord() {
 function getLocalWord() {
     const localWords = ["apple", "grape", "lemon", "mango", "berry", "peach", "melon"];
     return localWords[Math.floor(Math.random() * localWords.length)];
+}
+
+async function validateWord(word) {
+    word = word.toLowerCase().trim();
+    // Check cache first
+    if (validWordsCache.includes(word)) {
+        console.log(`Word ${word} found in cache.`);
+        return true;
+    }
+    // Check local words (offline fallback)
+    const localWords = ["apple", "grape", "lemon", "mango", "berry", "peach", "melon"];
+    if (localWords.includes(word)) {
+        console.log(`Word ${word} found in local words.`);
+        validWordsCache.push(word);
+        return true;
+    }
+    // Check Datamuse API
+    try {
+        const response = await fetch(`https://api.datamuse.com/words?sp=${word}&max=1`);
+        const words = await response.json();
+        if (words.length > 0 && words[0].word === word) {
+            console.log(`Word ${word} validated via API.`);
+            validWordsCache.push(word);
+            return true;
+        }
+        console.log(`Word ${word} not found in API.`);
+        return false;
+    } catch (error) {
+        console.error(`Error validating word ${word}:`, error);
+        return localWords.includes(word); // Fallback to local words on error
+    }
 }
 
 function showModal(message) {
@@ -114,11 +148,16 @@ function startGame(secretWord) {
     console.log("Grid initialized with new cells.");
 }
 
-function submitGuess() {
+async function submitGuess() {
     const guessInput = document.getElementById("guess");
     const guess = guessInput.value.toLowerCase().trim();
     if (guess.length !== 5 || !/^[a-z]{5}$/.test(guess)) {
-        showModal("Please enter a valid 5-letter word!");
+        showModal("Please enter a 5-letter word containing only letters!");
+        return;
+    }
+    const isValidWord = await validateWord(guess);
+    if (!isValidWord) {
+        showModal("Please enter a valid English word!");
         return;
     }
     guesses.push(guess);
